@@ -1,0 +1,3 @@
+pyvenv
+build
+**.egg-info
