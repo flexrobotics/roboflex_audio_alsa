@@ -47,7 +47,7 @@ class CMakeBuild(build_ext):
 
 setup(
     name='roboflex.audio_alsa',
-    version='0.1.0',
+    version='0.1.1',
     description='Roboflex Audio input library using ALSA',
     author='Colin Prepscius',
     author_email='colinprepscius@gmail.com',
