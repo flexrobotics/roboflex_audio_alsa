@@ -1,3 +1,11 @@
-pyvenv
+bazel-**
+.vscode
 build
+dist
+pyvenv
+__pycache__
+**.ipynb
+**/webcam_fastsam/models/*
+**/webcam_fastsam/submodules/*
+**.whl
 **.egg-info

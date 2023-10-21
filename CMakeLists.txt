@@ -54,11 +54,11 @@ target_link_libraries(roboflex_audio_alsa PUBLIC
 
     # Unfortunately, we need to link against all these libraries
     # because they are used by roboflex_core. Urgh, someone help.
-    Eigen3::Eigen
     flatbuffers_util 
     xtensor 
     xsimd 
-    xtl 
+    xtl
+    Eigen3::Eigen
 )
 
 

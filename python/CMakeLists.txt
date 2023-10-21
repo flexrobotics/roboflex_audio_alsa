@@ -1,7 +1,7 @@
 # python/CMakeLists.txt
 cmake_minimum_required(VERSION 3.25)
 
-project(roboflex_audio_alsa_python VERSION 0.1.0 DESCRIPTION "roboflex audio alsa python")
+project(roboflex_audio_alsa_python VERSION 0.1.2 DESCRIPTION "roboflex audio alsa python")
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
@@ -12,6 +12,8 @@ set(PYBIND11_CPP_STANDARD -std=c++20)
 
 # -------------------- 
 # Resolve dependencies
+
+find_package(Python REQUIRED COMPONENTS Interpreter Development NumPy)
 
 include(FetchContent)
 
@@ -32,7 +34,9 @@ pybind11_add_module(roboflex_audio_alsa_ext
 )
 
 # Link against your the library and any necessary dependencies
-target_link_libraries(roboflex_audio_alsa_ext PRIVATE roboflex_audio_alsa)
+target_link_libraries(roboflex_audio_alsa_ext PRIVATE 
+    roboflex_audio_alsa
+)
 
 # If you have specific compile definitions or options for just the Python module
 # target_compile_definitions(pyroboflex PRIVATE SOME_DEFINITION)
@@ -40,12 +44,6 @@ target_link_libraries(roboflex_audio_alsa_ext PRIVATE roboflex_audio_alsa)
 # You can set properties for the target if necessary.
 set_target_properties(roboflex_audio_alsa_ext PROPERTIES
     POSITION_INDEPENDENT_CODE ON
-
-    # # We want to use an explicit RPATH, so we can
-    # # find libuvc.so where we installed it.
-    # BUILD_WITH_INSTALL_RPATH FALSE
-    # INSTALL_RPATH "${CMAKE_INSTALL_PREFIX}/lib"
-    # INSTALL_RPATH_USE_LINK_PATH TRUE
 )
 
 
