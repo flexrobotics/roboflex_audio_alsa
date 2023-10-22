@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.25)
 
-project(roboflex_audio_alsa VERSION 0.1.1 DESCRIPTION "roboflex audio sensor using ALSA")
+project(roboflex_audio_alsa VERSION 0.1.3 DESCRIPTION "roboflex audio sensor using ALSA")
 
 # specify the C++ standard
 set(CMAKE_CXX_STANDARD 20)
@@ -10,19 +10,22 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 # -------------------- 
 # Resolve dependencies
 
+include(FetchContent)
+
 # Advanced Linux Sound Architecture (ALSA)
 find_package(ALSA REQUIRED)                                    
 
-# Locate the installed roboflex_core and its dependencies (a few)
+# Locate the installed roboflex_core and its dependencies
+
+# We're gonna use FetchContent to get and build this, instead of find_package
 # find_package(roboflex_core REQUIRED)
 
-include(FetchContent)
-
-# download and build pybind11
+# download and build roboflex_core
 FetchContent_Declare(roboflex_core
     GIT_REPOSITORY https://github.com/flexrobotics/roboflex.git
     GIT_TAG        main
 )
+set(BUILD_ROBOFLEX_PYTHON_EXT OFF CACHE BOOL "" FORCE)
 FetchContent_MakeAvailable(roboflex_core)
 
 
@@ -53,7 +56,8 @@ target_link_libraries(roboflex_audio_alsa PUBLIC
     roboflex_core
 
     # Unfortunately, we need to link against all these libraries
-    # because they are used by roboflex_core. Urgh, someone help.
+    # because they are used by roboflex_core, and cmake doesn't
+    # seem to be transitivily doing it's thing. Urgh, someone help.
     flatbuffers_util 
     xtensor 
     xsimd 

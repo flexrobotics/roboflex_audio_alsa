@@ -57,7 +57,7 @@ PYBIND11_MODULE(roboflex_audio_alsa_ext, m) {
         .def(py::init<const std::string &, int, int, int, int, AudioSensor::BitDepth, const std::string &, bool>(),
             "Create an Audio sensor",
             py::arg("name") = "AudioSensor",
-            py::arg("channels") = 8,
+            py::arg("channels") = 1,
             py::arg("sampling_rate") = 48000,
             py::arg("capture_frames") = 512,
             py::arg("produce_frames") = 1024,

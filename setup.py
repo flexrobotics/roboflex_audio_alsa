@@ -4,6 +4,7 @@ import subprocess
 import platform
 from setuptools import setup, Extension
 from setuptools.command.build_ext import build_ext
+from pathlib import Path
 
 class CMakeExtension(Extension):
     def __init__(self, name, sourcedir=''):
@@ -45,16 +46,29 @@ class CMakeBuild(build_ext):
         subprocess.check_call(['cmake', ext.sourcedir] + cmake_args, cwd=self.build_temp)
         subprocess.check_call(['cmake', '--build', '.'] + build_args, cwd=self.build_temp)
 
+long_description = (Path(__file__).parent / "README.md").read_text()
+
 setup(
     name='roboflex.audio_alsa',
-    version='0.1.2',
+    version='0.1.3',
     description='Roboflex Audio input library using ALSA',
     author='Colin Prepscius',
     author_email='colinprepscius@gmail.com',
     url="https://github.com/flexrobotics/roboflex_audio_alsa",
-    long_description="Roboflex Audio input library using ALSA",
-    classifiers = [],
-    keywords = [],
+    long_description=long_description,
+    long_description_content_type='text/markdown',
+    classifiers = [
+        "Intended Audience :: Developers",
+        "License :: OSI Approved :: MIT License",
+        "Topic :: Software Development :: Libraries :: Python Modules",
+        "Topic :: Software Development :: Embedded Systems",
+        "Framework :: Robot Framework",
+        "Framework :: Robot Framework :: Library",
+        "Framework :: Robot Framework :: Tool",
+        "Programming Language :: C++",
+        "Programming Language :: Python :: 3",
+    ],
+    keywords = ["alsa", "audio", "robotics", "middleware", "flexbuffers", "python", "c++", "c++20"],
     license = "MIT",
     python_requires='>=3.6',
     install_requires=['numpy', 'roboflex'],
