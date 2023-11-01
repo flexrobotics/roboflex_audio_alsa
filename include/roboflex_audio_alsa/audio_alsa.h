@@ -44,7 +44,7 @@ template <typename SampleType>
 AudioDataT<SampleType>::AudioDataT(int channels, int rows, SampleType * buffer, double t0, double t1):
     core::Message(ModuleName, MessageName)
 {
-    AudioFrame data = Eigen::Map<Eigen::Matrix<SampleType, Eigen::Dynamic, Eigen::Dynamic>>(buffer, rows, channels);
+    AudioFrame data = Eigen::Map<Eigen::Matrix<SampleType, Eigen::Dynamic, Eigen::Dynamic>>(buffer, rows, channels).transpose();
 
     flexbuffers::Builder fbb = get_builder();
     WriteMapRoot(fbb, [&]() {
@@ -110,6 +110,7 @@ public:
         BitDepth bit_depth = BitDepth::S16LE,
         const string& device_name = "default",
         bool debug = false);
+        
     virtual ~AudioSensor();
 
 protected:

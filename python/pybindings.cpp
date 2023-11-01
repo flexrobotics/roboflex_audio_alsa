@@ -53,7 +53,7 @@ PYBIND11_MODULE(roboflex_audio_alsa_ext, m) {
         .value("S24_3LE", AudioSensor::BitDepth::S24_3LE)
     ;
 
-    py::class_<AudioSensor, Node, std::shared_ptr<AudioSensor>>(m, "AudioSensor")
+    py::class_<AudioSensor, RunnableNode, std::shared_ptr<AudioSensor>>(m, "AudioSensor")
         .def(py::init<const std::string &, int, int, int, int, AudioSensor::BitDepth, const std::string &, bool>(),
             "Create an Audio sensor",
             py::arg("name") = "AudioSensor",
