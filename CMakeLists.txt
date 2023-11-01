@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.25)
 
-project(roboflex_audio_alsa VERSION 0.1.6 DESCRIPTION "roboflex audio sensor using ALSA")
+project(roboflex_audio_alsa VERSION 0.1.7 DESCRIPTION "roboflex audio sensor using ALSA")
 
 # specify the C++ standard
 set(CMAKE_CXX_STANDARD 20)
@@ -77,12 +77,12 @@ target_link_libraries(roboflex_audio_alsa PUBLIC
 # Examples
 
 # basic_0 example
-add_executable(stream_from_mic_cpp examples/stream_from_mic_cpp.cpp)
-target_link_libraries(stream_from_mic_cpp PRIVATE 
-    roboflex_core 
-    roboflex_audio_alsa
-    roboflex_transport_zmq
-)
+# add_executable(stream_from_mic_cpp examples/stream_from_mic_cpp.cpp)
+# target_link_libraries(stream_from_mic_cpp PRIVATE 
+#     roboflex_core 
+#     roboflex_audio_alsa
+#     roboflex_transport_zmq
+# )
 
 
 # -------------------- 

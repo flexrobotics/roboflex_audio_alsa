@@ -1,7 +1,7 @@
 # python/CMakeLists.txt
 cmake_minimum_required(VERSION 3.25)
 
-project(roboflex_audio_alsa_python VERSION 0.1.6 DESCRIPTION "roboflex audio alsa python")
+project(roboflex_audio_alsa_python VERSION 0.1.7 DESCRIPTION "roboflex audio alsa python")
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
