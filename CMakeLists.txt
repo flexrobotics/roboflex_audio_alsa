@@ -1,6 +1,6 @@
-cmake_minimum_required(VERSION 3.25)
+cmake_minimum_required(VERSION 3.24)
 
-project(roboflex_audio_alsa VERSION 0.1.7 DESCRIPTION "roboflex audio sensor using ALSA")
+project(roboflex_audio_alsa VERSION 0.1.8 DESCRIPTION "roboflex audio sensor using ALSA")
 
 # specify the C++ standard
 set(CMAKE_CXX_STANDARD 20)
