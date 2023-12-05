@@ -15,11 +15,6 @@ include(FetchContent)
 # Advanced Linux Sound Architecture (ALSA)
 find_package(ALSA REQUIRED)                                    
 
-# Locate the installed roboflex_core and its dependencies
-
-# We're gonna use FetchContent to get and build this, instead of find_package
-# find_package(roboflex_core REQUIRED)
-
 # download and build roboflex_core
 FetchContent_Declare(roboflex_core
     GIT_REPOSITORY https://github.com/flexrobotics/roboflex.git
@@ -28,12 +23,13 @@ FetchContent_Declare(roboflex_core
 set(BUILD_ROBOFLEX_PYTHON_EXT OFF CACHE BOOL "" FORCE)
 FetchContent_MakeAvailable(roboflex_core)
 
+# ONLY IF YOU WILL COMPILE THE EXAMPLE
 # download and build roboflex_transport_zmq
-FetchContent_Declare(roboflex_transport_zmq
-    GIT_REPOSITORY https://github.com/flexrobotics/roboflex_transport_zmq.git
-    GIT_TAG        main
-)
-FetchContent_MakeAvailable(roboflex_transport_zmq)
+# FetchContent_Declare(roboflex_transport_zmq
+#     GIT_REPOSITORY https://github.com/flexrobotics/roboflex_transport_zmq.git
+#     GIT_TAG        main
+# )
+# FetchContent_MakeAvailable(roboflex_transport_zmq)
 
 
 # -------------------- 
@@ -54,22 +50,12 @@ target_include_directories(roboflex_audio_alsa PUBLIC
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include> 
     $<INSTALL_INTERFACE:include>
     ${ALSA_INCLUDE_DIRS}
-    #${roboflex_core_INCLUDE_DIRS}
 )
 
 # Link against the necessary libraries
 target_link_libraries(roboflex_audio_alsa PUBLIC 
-    ${ALSA_LIBRARIES}
     roboflex_core
-
-    # Unfortunately, we need to link against all these libraries
-    # because they are used by roboflex_core, and cmake doesn't
-    # seem to be transitivily doing it's thing. Urgh, someone help.
-    flatbuffers_util 
-    xtensor 
-    xsimd 
-    xtl
-    Eigen3::Eigen
+    ${ALSA_LIBRARIES}
 )
 
 
